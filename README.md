@@ -14,21 +14,21 @@ Problem sets and solutions in Typescript.
 
 ## Commands
 
-### `lint`
+### lint
 
 ```sh
 # uses eslint
 $ yarn lint
 ```
 
-### `format`
+### format
 
 ```sh
 # uses prettier
 $ yarn format
 ```
 
-### `test`
+### test
 
 ```sh
 # uses tap to run all tests
