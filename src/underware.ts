@@ -220,3 +220,36 @@ export const defaults = (obj: Item, ...args: Item[]): Item => {
   })
   return obj
 }
+
+interface Func {
+  (...args: unknown[]): unknown
+}
+
+export const once = (func: Func): Func => {
+  let hasRun = false
+  let result: unknown
+  return (...args) => {
+    if (!hasRun) {
+      result = func(...args)
+      hasRun = true
+    }
+    return result
+  }
+}
+
+export const memoize = (func: Func): Func => {
+  interface Hash {
+    [key: string]: unknown
+  }
+  let hash: Hash = {}
+
+  return (...args) => {
+    const key = args.length ? JSON.stringify(args[0]) : '__undefined__'
+
+    if (!hash[key]) {
+      hash[key] = func(...args)
+    }
+
+    return hash[key]
+  }
+}

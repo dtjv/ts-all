@@ -15,6 +15,8 @@ import {
   some,
   extend,
   defaults,
+  once,
+  memoize,
 } from '../src/underware'
 
 test('underware.first', ({ test, end }) => {
@@ -434,6 +436,41 @@ test('underware.defaults', ({ test, end }) => {
     t.plan(2)
     t.deepEqual(result, expected)
     t.equal(result, original)
+  })
+
+  end()
+})
+
+test('underware.once', ({ test, end }) => {
+  test('wrapped function called once', (t) => {
+    let numCalls = 0
+    const f = once(() => (numCalls += 1))
+    f()
+    f()
+    t.plan(1)
+    t.equal(numCalls, 1)
+  })
+
+  end()
+})
+
+test('underware.memoize', ({ test, end }) => {
+  test('wrapped function called once with no args', (t) => {
+    let numCalls = 0
+    const f = memoize(() => (numCalls += 1))
+    f()
+    f()
+    t.plan(1)
+    t.equal(numCalls, 1)
+  })
+
+  test('wrapped function called once with same args', (t) => {
+    let numCalls = 0
+    const f = memoize((x) => (numCalls += x as number))
+    f(1)
+    f(1)
+    t.plan(1)
+    t.equal(numCalls, 1)
   })
 
   end()
