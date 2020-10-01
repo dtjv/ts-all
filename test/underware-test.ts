@@ -17,6 +17,7 @@ import {
   defaults,
   once,
   memoize,
+  delay,
 } from '../src/underware'
 
 test('underware.first', ({ test, end }) => {
@@ -471,6 +472,36 @@ test('underware.memoize', ({ test, end }) => {
     f(1)
     t.plan(1)
     t.equal(numCalls, 1)
+  })
+
+  end()
+})
+
+test('underware.delay', ({ test, end }) => {
+  test('invokes function after wait time has elapsed', (t) => {
+    t.plan(1)
+    const wait = 500
+    const startTime = Date.now()
+
+    delay(() => {
+      t.true(Date.now() - startTime >= wait)
+    }, wait)
+  })
+
+  test('invokes function with arbitrary number of args', (t) => {
+    t.plan(2)
+    const argA = 5
+    const argB = 8
+
+    delay(
+      (x, y) => {
+        t.equal(x, argA)
+        t.equal(y, argB)
+      },
+      500,
+      argA,
+      argB
+    )
   })
 
   end()
