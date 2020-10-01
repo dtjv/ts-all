@@ -241,7 +241,7 @@ export const memoize = (func: Func): Func => {
   interface Hash {
     [key: string]: unknown
   }
-  let hash: Hash = {}
+  const hash: Hash = {}
 
   return (...args) => {
     const key = args.length ? JSON.stringify(args[0]) : '__undefined__'
@@ -252,4 +252,10 @@ export const memoize = (func: Func): Func => {
 
     return hash[key]
   }
+}
+
+export const delay = (func: Func, wait: number, ...args: unknown[]): void => {
+  setTimeout(() => {
+    func(...args)
+  }, wait)
 }
