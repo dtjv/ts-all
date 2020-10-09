@@ -259,3 +259,16 @@ export const delay = (func: Func, wait: number, ...args: unknown[]): void => {
     func(...args)
   }, wait)
 }
+
+type NestedArray<T> = T | T[] | NestedArray<T>[]
+
+export const flatten = <T>(collection: NestedArray<T>[] = []): T[] => {
+  let result: T[] = []
+  const { isArray } = Array
+
+  for (let item of collection) {
+    result = isArray(item) ? [...result, ...flatten(item)] : [...result, item]
+  }
+
+  return result
+}

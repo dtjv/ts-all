@@ -18,6 +18,7 @@ import {
   once,
   memoize,
   delay,
+  flatten,
 } from '../src/underware'
 
 test('underware.first', ({ test, end }) => {
@@ -443,7 +444,7 @@ test('underware.defaults', ({ test, end }) => {
 })
 
 test('underware.once', ({ test, end }) => {
-  test('wrapped function called once', (t) => {
+  test('calls wrapped function once', (t) => {
     let numCalls = 0
     const f = once(() => (numCalls += 1))
     f()
@@ -456,7 +457,7 @@ test('underware.once', ({ test, end }) => {
 })
 
 test('underware.memoize', ({ test, end }) => {
-  test('wrapped function called once with no args', (t) => {
+  test('calls wrapped function once with no args', (t) => {
     let numCalls = 0
     const f = memoize(() => (numCalls += 1))
     f()
@@ -465,7 +466,7 @@ test('underware.memoize', ({ test, end }) => {
     t.equal(numCalls, 1)
   })
 
-  test('wrapped function called once with same args', (t) => {
+  test('calls wrapped function once with same args', (t) => {
     let numCalls = 0
     const f = memoize((x) => (numCalls += x as number))
     f(1)
@@ -502,6 +503,25 @@ test('underware.delay', ({ test, end }) => {
       argA,
       argB
     )
+  })
+
+  end()
+})
+
+test('underware.flatten', ({ test, end }) => {
+  test('handles an undefined collection', (t) => {
+    const result = flatten<number>(undefined)
+    const expected: number[] = []
+    t.plan(1)
+    t.deepEqual(result, expected)
+  })
+
+  test('flattens deeply nested array', (t) => {
+    const input = [1, 2, [3, 4], [5, [6, 7, [8]]]]
+    const result = flatten<number>(input)
+    const expected = [1, 2, 3, 4, 5, 6, 7, 8]
+    t.plan(1)
+    t.deepEqual(result, expected)
   })
 
   end()

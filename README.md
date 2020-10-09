@@ -40,4 +40,4 @@ $ npx tap test/<filename-test.ts>
 
 ## License
 
-The source code is available under the [MIT](LICENSE)
+The source code is available under the [MIT License](LICENSE).
