@@ -272,3 +272,24 @@ export const flatten = <T>(collection: NestedArray<T>[] = []): T[] => {
 
   return result
 }
+
+export const intersection = <T>(...collections: T[][]): T[] => {
+  const result: T[] = []
+
+  if (!collections.length) return []
+
+  // find shortest array in collection
+  const sortedByLength = collections
+    .slice(0)
+    .sort((a, b) => a.length - b.length)
+  const [shortest, rest] = [sortedByLength[0], sortedByLength.slice(1)]
+
+  // check if each item in the shortest list is in each of the remaining lists
+  for (const item of shortest) {
+    if (rest.length && rest.every((collection) => collection.includes(item))) {
+      result.push(item)
+    }
+  }
+
+  return result
+}

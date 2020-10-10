@@ -19,6 +19,7 @@ import {
   memoize,
   delay,
   flatten,
+  intersection,
 } from '../src/underware'
 
 test('underware.first', ({ test, end }) => {
@@ -520,6 +521,36 @@ test('underware.flatten', ({ test, end }) => {
     const input = [1, 2, [3, 4], [5, [6, 7, [8]]]]
     const result = flatten<number>(input)
     const expected = [1, 2, 3, 4, 5, 6, 7, 8]
+    t.plan(1)
+    t.deepEqual(result, expected)
+  })
+
+  end()
+})
+
+test('underware.intersection', ({ test, end }) => {
+  test('returns an empty array given no arguments', (t) => {
+    const result = intersection<number>()
+    const expected: number[] = []
+    t.plan(1)
+    t.deepEqual(result, expected)
+  })
+
+  test('returns an empty array given one array', (t) => {
+    const input = [1, 2, 3]
+    const result = intersection<number>(input)
+    const expected: number[] = []
+    t.plan(1)
+    t.deepEqual(result, expected)
+  })
+
+  test('returns the intersection of multiple number arrays', (t) => {
+    const result = intersection<number>(
+      [8, 1, 5, 2, 3],
+      [3, 7, 5],
+      [5, 1, 3, 6]
+    )
+    const expected = [3, 5]
     t.plan(1)
     t.deepEqual(result, expected)
   })
