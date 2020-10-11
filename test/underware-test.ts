@@ -21,6 +21,7 @@ import {
   flatten,
   intersection,
   difference,
+  zip,
 } from '../src/underware'
 
 test('underware.first', ({ test, end }) => {
@@ -570,6 +571,21 @@ test('underware.difference', ({ test, end }) => {
   test('returns the difference of multiple number arrays', (t) => {
     const result = difference<number>([1, 2, 3, 4], [2, 5], [4, 5, 7])
     const expected = [1, 3]
+    t.plan(1)
+    t.deepEqual(result, expected)
+  })
+
+  end()
+})
+
+test('underware.zip', ({ test, end }) => {
+  test('zips multiple number arrays', (t) => {
+    const result = zip<number>([1, 2, 3, 4], [2, 8, 5], [4, 5, 7])
+    const expected = [
+      [1, 2, 4],
+      [2, 8, 5],
+      [3, 5, 7],
+    ]
     t.plan(1)
     t.deepEqual(result, expected)
   })
