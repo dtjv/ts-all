@@ -293,3 +293,9 @@ export const intersection = <T>(...collections: T[][]): T[] => {
 
   return result
 }
+
+export const difference = <T>(collection: T[] = [], ...lists: T[][]): T[] => {
+  return collection.filter((item) =>
+    lists.every((list) => !list.includes(item))
+  )
+}

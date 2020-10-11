@@ -20,6 +20,7 @@ import {
   delay,
   flatten,
   intersection,
+  difference,
 } from '../src/underware'
 
 test('underware.first', ({ test, end }) => {
@@ -551,6 +552,24 @@ test('underware.intersection', ({ test, end }) => {
       [5, 1, 3, 6]
     )
     const expected = [3, 5]
+    t.plan(1)
+    t.deepEqual(result, expected)
+  })
+
+  end()
+})
+
+test('underware.difference', ({ test, end }) => {
+  test('returns an empty array given no arguments', (t) => {
+    const result = difference<number>()
+    const expected: number[] = []
+    t.plan(1)
+    t.deepEqual(result, expected)
+  })
+
+  test('returns the difference of multiple number arrays', (t) => {
+    const result = difference<number>([1, 2, 3, 4], [2, 5], [4, 5, 7])
+    const expected = [1, 3]
     t.plan(1)
     t.deepEqual(result, expected)
   })
