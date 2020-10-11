@@ -299,3 +299,17 @@ export const difference = <T>(collection: T[] = [], ...lists: T[][]): T[] => {
     lists.every((list) => !list.includes(item))
   )
 }
+
+export const zip = <T>(...collections: T[][]): T[][] => {
+  const result: T[][] = []
+  const shortestLength = collections.reduce(
+    (p, c) => (c.length < p ? c.length : p),
+    Number.MAX_SAFE_INTEGER
+  )
+
+  for (let i = 0; i < shortestLength; i += 1) {
+    result.push(collections.map((c) => c[i]))
+  }
+
+  return result
+}
