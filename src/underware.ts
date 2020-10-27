@@ -1,7 +1,7 @@
 /**
  * export the implementations of each function listed:
+ * (don't use javascript class' built-in methods)
  *
- *   .identity(val)
  *   .first(collection, n)
  *   .last(collection, n)
  *   .each(collection, iteratee)
@@ -40,24 +40,43 @@ interface Item {
   [key: string]: unknown
 }
 
-export const first = (collection: number[] = [], n: number): number[] => {
-  const result: number[] = []
-  const count = Math.abs(n)
+/*
+ * returns the first element of an array.
+ * passing in `takeCount` where:
+ *   0 < takeCountn < array.length, returns first `takeCount` elements of array
+ *   takeCount <= 0, returns an empty array
+ *   takeCount > array.length, returns all elements of array
+ */
+export const first = <T>(collection: T[] = [], takeCount?: number): T | T[] => {
+  if (takeCount === undefined) return collection[0]
+  if (takeCount <= 0) return []
 
-  for (let i = 0; i < count && i < collection.length; i += 1) {
+  const result: T[] = []
+
+  for (let i = 0; i < takeCount && i < collection.length; i += 1) {
     result[i] = collection[i]
   }
 
   return result
 }
 
-export const last = (collection: number[] = [], n: number): number[] => {
-  const result: number[] = []
-  const startIdx =
-    Math.abs(n) > collection.length ? 0 : collection.length - Math.abs(n)
+/*
+ * returns the last element of an array.
+ * passing in `takeCount` where:
+ *   0 < takeCount < array.length, returns last `takeCount` elements of array
+ *   takeCount <= 0, returns an empty array
+ *   takeCount > array.length, returns all elements of array
+ */
+export const last = <T>(collection: T[] = [], takeCount?: number): T | T[] => {
+  if (takeCount === undefined) return collection[collection.length - 1]
+  if (takeCount <= 0) return []
 
-  for (let i = 0, j = startIdx; j < collection.length; i += 1, j += 1) {
-    result[i] = collection[j]
+  const result: T[] = []
+  const startIdx =
+    takeCount > collection.length ? 0 : collection.length - takeCount
+
+  for (let i = startIdx; i < collection.length; i += 1) {
+    result.push(collection[i])
   }
 
   return result

@@ -25,78 +25,64 @@ import {
 } from '../src/underware'
 
 test('underware.first', ({ test, end }) => {
-  test('handles an undefined collection', (t) => {
-    const result = first(undefined, 2)
-    const expected: number[] = []
-    t.plan(1)
-    t.deepEqual(result, expected)
+  test('returns undefined', async (t) => {
+    t.equal(first([]), undefined)
+    t.equal(first(undefined), undefined)
   })
 
-  test('handles an empty collection', (t) => {
-    const result = first([], 2)
-    const expected: number[] = []
-    t.plan(1)
-    t.deepEqual(result, expected)
+  test('returns an empty array for any `takeCount` > 0', async (t) => {
+    t.deepEqual(first([], 2), [])
+    t.deepEqual(first(undefined, 4), [])
   })
 
-  test('returns first |n| entries when n < 0', (t) => {
-    const result = first([1, 2, 3, 4], -1)
-    const expected = [1]
-    t.plan(1)
-    t.deepEqual(result, expected)
+  test('returns an empty array for `takeCount` < 0', async (t) => {
+    t.deepEqual(first([1, 2, 3, 4], -1), [])
   })
 
-  test('returns first n entries when n < collection count', (t) => {
-    const result = first([1, 2, 3, 4], 2)
-    const expected = [1, 2]
-    t.plan(1)
-    t.deepEqual(result, expected)
+  test('returns first entry', async (t) => {
+    t.equal(first([1, 2, 3, 4]), 1)
+    t.equal(first(['one', 'two', 'three']), 'one')
   })
 
-  test('returns all entries when n > collection count', (t) => {
-    const result = first([1, 2, 3, 4], 5)
-    const expected = [1, 2, 3, 4]
-    t.plan(1)
-    t.deepEqual(result, expected)
+  test('returns first `takeCount` entries', async (t) => {
+    t.deepEqual(first([1, 2, 3, 4], 2), [1, 2])
+  })
+
+  test('returns all entries', async (t) => {
+    t.deepEqual(first([1, 2, 3, 4], 5), [1, 2, 3, 4])
   })
 
   end()
 })
 
 test('underware.last', ({ test, end }) => {
-  test('handles an undefined collection', (t) => {
-    const result = last(undefined, 2)
-    const expected: number[] = []
-    t.plan(1)
-    t.deepEqual(result, expected)
+  test('returns undefined', async (t) => {
+    t.equal(last([]), undefined)
+    t.equal(last(undefined), undefined)
   })
 
-  test('handles an empty collection', (t) => {
-    const result = last([], 2)
-    const expected: number[] = []
-    t.plan(1)
-    t.deepEqual(result, expected)
+  test('returns an empty array for any `takeCount` > 0', async (t) => {
+    t.deepEqual(last([], 2), [])
+    t.deepEqual(last(undefined, 4), [])
   })
 
-  test('returns last |n| entries when n < 0', (t) => {
-    const result = last([1, 2, 3, 4], -1)
-    const expected = [4]
-    t.plan(1)
-    t.deepEqual(result, expected)
+  test('returns an empty array for `takeCount` < 0', async (t) => {
+    t.deepEqual(last([1, 2, 3, 4], -1), [])
   })
 
-  test('returns last n entries when n < collection count', (t) => {
-    const result = last([1, 2, 3, 4], 2)
-    const expected = [3, 4]
-    t.plan(1)
-    t.deepEqual(result, expected)
+  test('returns last entry', async (t) => {
+    t.equal(last([1, 2, 3, 4]), 4)
+    t.equal(last(['one', 'two', 'three']), 'three')
   })
 
-  test('returns all n entries when n > collection count', (t) => {
-    const result = last([1, 2, 3, 4], 5)
-    const expected = [1, 2, 3, 4]
-    t.plan(1)
-    t.deepEqual(result, expected)
+  test('returns last `takeCount` entries', async (t) => {
+    t.deepEqual(last([1, 2, 3, 4], 2), [3, 4])
+    t.deepEqual(last(['one', 'two', 'three'], 2), ['two', 'three'])
+  })
+
+  test('returns all entries', async (t) => {
+    t.deepEqual(last([1, 2, 3, 4], 5), [1, 2, 3, 4])
+    t.deepEqual(last(['one', 'two', 'three'], 5), ['one', 'two', 'three'])
   })
 
   end()
