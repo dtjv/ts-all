@@ -40,11 +40,26 @@ interface Item {
   [key: string]: unknown
 }
 
-export const first = (collection: number[] = [], n: number): number[] => {
-  const result: number[] = []
-  const count = Math.abs(n)
+/*
+ * returns the first element of an array.
+ * passing in `n` where:
+ *   0 < n < array.length, returns first n elements of array
+ *   n <= 0, returns an empty array
+ *   n > array.length, returns  returns all elements of array
+ *
+ */
+export const first = <T>(collection: T[] = [], takeCount?: number): T | T[] => {
+  if (takeCount === undefined) {
+    return collection[0]
+  }
 
-  for (let i = 0; i < count && i < collection.length; i += 1) {
+  if (takeCount <= 0) {
+    return []
+  }
+
+  const result: T[] = []
+
+  for (let i = 0; i < takeCount && i < collection.length; i += 1) {
     result[i] = collection[i]
   }
 
