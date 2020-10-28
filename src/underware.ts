@@ -2,43 +2,50 @@
  * export the implementations of each function listed:
  * (don't use javascript class' built-in methods)
  *
- *   .first(collection, n)
- *   .last(collection, n)
- *   .each(collection, iteratee)
- *   .indexOf(collection, target)
- *   .filter(collection, test)
- *   .reject(collection, test)
- *   .uniqify(collection)
- *   .map(collection, iteratee)
- *   .pluck(collection, key)
- *   .reduce(collection, iteratee, accumulator)
- *   .contains(collection, target)
- *   .every(collection, iteratee)
- *   .some(collection, iteratee)
+ *   .first(arr, n)
+ *   .last(arr, n)
+ *   .each(arr, iteratee)
+ *   .indexOf(arr, target)
+ *   .filter(arr, test)
+ *   .reject(arr, test)
+ *   .uniqify(arr)
+ *   .map(arr, iteratee)
+ *   .pluck(arr, key)
+ *   .reduce(arr, iteratee, accumulator)
+ *   .contains(arr, target)
+ *   .every(arr, iteratee)
+ *   .some(arr, iteratee)
  *   .extends(obj, ...args)
  *   .defaults(obj, ...args)
  *   .once(func)
  *   .memoize(func)
  *   .delay(func, wait, ...args)
- *   .shuffle(collection)
- *   .invoke(collection, functionOrKey)
- *   .sortBy(collection, iteratee)
- *   .zip(...args)
  *   .flatten(nestedArray)
  *   .intersection(...args)
  *   .difference(arr, ...args)
+ *   .zip(...args)
  */
-interface TestIteratee<T> {
-  (value: T, index: number, collection: T[]): boolean
-}
-
 interface Iteratee<T, R> {
-  (value: T, index: number, collection: T[]): R
+  (value: T, index: number, arr: T[]): R
 }
 
-interface Item {
+interface TestIteratee<T> {
+  (value: T, index: number, arr: T[]): boolean
+}
+
+interface Obj {
   [key: string]: unknown
 }
+
+interface Func {
+  (...args: unknown[]): unknown
+}
+
+interface ReduceCallback<T, R> {
+  (result: R, value: T, index: number, arr: T[]): R
+}
+
+type NestedArray<T> = T | T[] | NestedArray<T>[]
 
 /*
  * returns the first element of an array.
@@ -47,14 +54,14 @@ interface Item {
  *   takeCount <= 0, returns an empty array
  *   takeCount > array.length, returns all elements of array
  */
-export const first = <T>(collection: T[] = [], takeCount?: number): T | T[] => {
-  if (takeCount === undefined) return collection[0]
+export const first = <T>(arr: T[] = [], takeCount?: number): T | T[] => {
+  if (takeCount === undefined) return arr[0]
   if (takeCount <= 0) return []
 
   const result: T[] = []
 
-  for (let i = 0; i < takeCount && i < collection.length; i += 1) {
-    result[i] = collection[i]
+  for (let i = 0; i < takeCount && i < arr.length; i += 1) {
+    result[i] = arr[i]
   }
 
   return result
@@ -67,35 +74,31 @@ export const first = <T>(collection: T[] = [], takeCount?: number): T | T[] => {
  *   takeCount <= 0, returns an empty array
  *   takeCount > array.length, returns all elements of array
  */
-export const last = <T>(collection: T[] = [], takeCount?: number): T | T[] => {
-  if (takeCount === undefined) return collection[collection.length - 1]
+export const last = <T>(arr: T[] = [], takeCount?: number): T | T[] => {
+  if (takeCount === undefined) return arr[arr.length - 1]
   if (takeCount <= 0) return []
 
   const result: T[] = []
-  const startIdx =
-    takeCount > collection.length ? 0 : collection.length - takeCount
+  const startIdx = takeCount > arr.length ? 0 : arr.length - takeCount
 
-  for (let i = startIdx; i < collection.length; i += 1) {
-    result.push(collection[i])
+  for (let i = startIdx; i < arr.length; i += 1) {
+    result.push(arr[i])
   }
 
   return result
 }
 
-export const each = <T, R>(
-  collection: T[] = [],
-  iteratee: Iteratee<T, R>
-): void => {
-  for (let i = 0; i < collection.length; i += 1) {
-    iteratee(collection[i], i, collection)
+export const each = <T, R>(arr: T[] = [], iteratee: Iteratee<T, R>): void => {
+  for (let i = 0; i < arr.length; i += 1) {
+    iteratee(arr[i], i, arr)
   }
 }
 
-export const indexOf = (collection: number[] = [], target: number): number => {
+export const indexOf = <T>(arr: T[] = [], target: T): number => {
   let index = -1
 
-  for (let i = 0; i < collection.length && index === -1; i += 1) {
-    if (collection[i] === target) {
+  for (let i = 0; i < arr.length && index === -1; i += 1) {
+    if (arr[i] === target) {
       index = i
     }
   }
@@ -103,42 +106,32 @@ export const indexOf = (collection: number[] = [], target: number): number => {
   return index
 }
 
-export const filter = <T>(collection: T[] = [], test: TestIteratee<T>): T[] => {
+export const filter = <T>(arr: T[] = [], test: TestIteratee<T>): T[] => {
   const result: T[] = []
 
-  for (let i = 0; i < collection.length; i += 1) {
-    if (test(collection[i], i, collection)) {
-      result.push(collection[i])
+  for (let i = 0; i < arr.length; i += 1) {
+    if (test(arr[i], i, arr)) {
+      result.push(arr[i])
     }
   }
 
   return result
 }
 
-export const reject = <T>(collection: T[] = [], test: TestIteratee<T>): T[] => {
+export const reject = <T>(arr: T[] = [], test: TestIteratee<T>): T[] =>
+  filter(arr, (...args) => !test(...args))
+
+export const uniqify = <T>(arr: T[] = []): T[] => {
+  interface Hash {
+    [key: string]: boolean
+  }
+  const hash: Hash = {}
   const result: T[] = []
 
-  for (let i = 0; i < collection.length; i += 1) {
-    if (!test(collection[i], i, collection)) {
-      result.push(collection[i])
-    }
-  }
-
-  return result
-}
-
-export const uniqify = (collection: number[] = []): number[] => {
-  interface HashDict {
-    [key: number]: boolean
-  }
-  const hash: HashDict = {}
-  const result: number[] = []
-
-  for (let i = 0; i < collection.length; i += 1) {
-    const item = collection[i]
-
-    if (!hash[item]) {
-      hash[item] = true
+  for (const item of arr) {
+    const key = JSON.stringify(item)
+    if (!hash[key]) {
+      hash[key] = true
       result.push(item)
     }
   }
@@ -146,90 +139,78 @@ export const uniqify = (collection: number[] = []): number[] => {
   return result
 }
 
-export const map = <T, R>(
-  collection: T[] = [],
-  iteratee: Iteratee<T, R>
-): R[] => {
+export const map = <T, R>(arr: T[] = [], iteratee: Iteratee<T, R>): R[] => {
   const result: R[] = []
 
-  for (let i = 0; i < collection.length; i += 1) {
-    result.push(iteratee(collection[i], i, collection))
+  for (let i = 0; i < arr.length; i += 1) {
+    result.push(iteratee(arr[i], i, arr))
   }
 
   return result
 }
 
-export const pluck = (collection: Item[] = [], key: string): unknown[] => {
+export const pluck = (arr: Obj[] = [], key: string): unknown[] => {
   const result: unknown[] = []
 
-  for (const item of collection) {
+  for (const item of arr) {
     result.push(item[key])
   }
 
   return result
 }
 
-interface Callback<T, R> {
-  (result: R, value: T, index: number, collection: T[]): R
-}
-
 export const reduce = <T, R>(
-  collection: T[] = [],
-  callback: Callback<T, R>,
+  arr: T[] = [],
+  callback: ReduceCallback<T, R>,
   initialvalue: R
 ): R => {
   let result = initialvalue
 
-  for (let i = 0; i < collection.length; i += 1) {
-    result = callback(result, collection[i], i, collection)
+  for (let i = 0; i < arr.length; i += 1) {
+    result = callback(result, arr[i], i, arr)
   }
 
   return result
 }
 
 export const contains = <T extends string | number | boolean>(
-  collection: T[] = [],
+  arr: T[] = [],
   target: T
 ): boolean => {
-  for (const item of collection) {
+  for (const item of arr) {
     if (item === target) return true
   }
 
   return false
 }
 
-export const every = <T>(
-  collection: T[] = [],
-  iteratee: TestIteratee<T>
-): boolean => {
-  for (let i = 0; i < collection.length; i += 1) {
-    if (!iteratee(collection[i], i, collection)) return false
+export const every = <T>(arr: T[] = [], iteratee: TestIteratee<T>): boolean => {
+  for (let i = 0; i < arr.length; i += 1) {
+    if (!iteratee(arr[i], i, arr)) return false
   }
 
   return true
 }
 
-export const some = <T>(
-  collection: T[] = [],
-  iteratee: TestIteratee<T>
-): boolean => {
-  for (let i = 0; i < collection.length; i += 1) {
-    if (iteratee(collection[i], i, collection)) return true
+export const some = <T>(arr: T[] = [], iteratee: TestIteratee<T>): boolean => {
+  for (let i = 0; i < arr.length; i += 1) {
+    if (iteratee(arr[i], i, arr)) return true
   }
 
   return false
 }
 
-export const extend = (obj: Item, ...args: Item[]): Item => {
+export const extend = (obj: Obj, ...args: Obj[]): Obj => {
   args.forEach((arg) => {
     for (const [key, value] of Object.entries(arg)) {
       obj[key] = value
     }
   })
+
   return obj
 }
 
-export const defaults = (obj: Item, ...args: Item[]): Item => {
+export const defaults = (obj: Obj, ...args: Obj[]): Obj => {
   args.forEach((arg) => {
     for (const [key, value] of Object.entries(arg)) {
       if (!obj[key]) {
@@ -237,11 +218,8 @@ export const defaults = (obj: Item, ...args: Item[]): Item => {
       }
     }
   })
-  return obj
-}
 
-interface Func {
-  (...args: unknown[]): unknown
+  return obj
 }
 
 export const once = (func: Func): Func => {
@@ -257,10 +235,7 @@ export const once = (func: Func): Func => {
 }
 
 export const memoize = (func: Func): Func => {
-  interface Hash {
-    [key: string]: unknown
-  }
-  const hash: Hash = {}
+  const hash: Obj = {}
 
   return (...args) => {
     const key = args.length ? JSON.stringify(args[0]) : '__undefined__'
@@ -279,33 +254,30 @@ export const delay = (func: Func, wait: number, ...args: unknown[]): void => {
   }, wait)
 }
 
-type NestedArray<T> = T | T[] | NestedArray<T>[]
-
-export const flatten = <T>(collection: NestedArray<T>[] = []): T[] => {
+export const flatten = <T>(arr: NestedArray<T>[] = []): T[] => {
   let result: T[] = []
   const { isArray } = Array
 
-  for (let item of collection) {
+  for (let item of arr) {
     result = isArray(item) ? [...result, ...flatten(item)] : [...result, item]
   }
 
   return result
 }
 
-export const intersection = <T>(...collections: T[][]): T[] => {
+export const intersection = <T>(...arrays: T[][]): T[] => {
   const result: T[] = []
 
-  if (!collections.length) return []
+  if (!arrays.length) return []
+  if (arrays.length === 1) return arrays[0]
 
-  // find shortest array in collection
-  const sortedByLength = collections
-    .slice(0)
-    .sort((a, b) => a.length - b.length)
-  const [shortest, rest] = [sortedByLength[0], sortedByLength.slice(1)]
+  // find shortest array in arr
+  const sortedByLength = arrays.slice(0).sort((a, b) => a.length - b.length)
+  const [shortest, others] = [sortedByLength[0], sortedByLength.slice(1)]
 
   // check if each item in the shortest list is in each of the remaining lists
   for (const item of shortest) {
-    if (rest.length && rest.every((collection) => collection.includes(item))) {
+    if (others.every((arr) => arr.includes(item))) {
       result.push(item)
     }
   }
@@ -313,21 +285,19 @@ export const intersection = <T>(...collections: T[][]): T[] => {
   return result
 }
 
-export const difference = <T>(collection: T[] = [], ...lists: T[][]): T[] => {
-  return collection.filter((item) =>
-    lists.every((list) => !list.includes(item))
-  )
+export const difference = <T>(arr: T[] = [], ...lists: T[][]): T[] => {
+  return arr.filter((item) => lists.every((list) => !list.includes(item)))
 }
 
-export const zip = <T>(...collections: T[][]): T[][] => {
+export const zip = <T>(...arrays: T[][]): T[][] => {
   const result: T[][] = []
-  const shortestLength = collections.reduce(
+  const shortestLength = arrays.reduce(
     (p, c) => (c.length < p ? c.length : p),
     Number.MAX_SAFE_INTEGER
   )
 
   for (let i = 0; i < shortestLength; i += 1) {
-    result.push(collections.map((c) => c[i]))
+    result.push(arrays.map((c) => c[i]))
   }
 
   return result
