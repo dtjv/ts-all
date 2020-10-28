@@ -8,7 +8,7 @@
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint . --ext .ts",
-    "test": "tap",
+    "test": "tap -M coverage-map.js",
     "coverage": "tap --coverage-report=html"
   },
   "devDependencies": {
