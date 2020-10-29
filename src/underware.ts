@@ -258,7 +258,7 @@ export const flatten = <T>(arr: NestedArray<T>[] = []): T[] => {
   let result: T[] = []
   const { isArray } = Array
 
-  for (let item of arr) {
+  for (const item of arr) {
     result = isArray(item) ? [...result, ...flatten(item)] : [...result, item]
   }
 

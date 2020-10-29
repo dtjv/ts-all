@@ -11,14 +11,17 @@
  *   const msg = compose(sayHi, yell);
  *   msg('tom'); // `hi: TOM!`
  */
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 interface Func {
-  (...args: string[]): string
+  (...args: any[]): unknown
 }
 
-export const compose = (...funcs: Func[]) => {
-  return (...args: string[]) => {
-    let result: string = ''
+export const compose = (...funcs: Func[]): Func => {
+  return (...args: any[]): unknown => {
     let input = [...args]
+    let result
 
     for (let i = funcs.length - 1; i >= 0; i -= 1) {
       result = funcs[i](...input)
