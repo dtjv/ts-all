@@ -11,20 +11,15 @@
  *  pipe(add2, multiplyBy3)(5); // 21
  *  pipe(add2, multiplyBy3, multiplyBy3)(5); // 63
  */
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 interface Func {
-  (...args: any[]): any
+  (...args: any[]): unknown
 }
 
-export const pipe = (...funcs: Func[]) => {
-  return (...args: any[]) => {
-    let result: any
-    let input = [...args]
-
-    for (const f of funcs) {
-      result = f(...input)
-      input = [result]
-    }
-
-    return result
+export const pipe = (...funcs: Func[]): Func => {
+  return (...args: any[]): unknown => {
+    return funcs.slice(1).reduce((r, f) => f(r), funcs[0](...args))
   }
 }

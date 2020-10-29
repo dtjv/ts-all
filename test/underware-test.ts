@@ -63,20 +63,20 @@ test('last', async ({ test }) => {
 
 test('each', async ({ test }) => {
   test('handles an undefined array', async (t) => {
-    const result: any[] = []
-    const iteratee = (item: any): void => {
+    const result: unknown[] = []
+    const iteratee = (item: unknown): void => {
       result.push(item)
     }
-    _.each<any, void>(undefined, iteratee)
+    _.each(undefined, iteratee)
     t.deepEqual(result, [])
   })
 
   test('handles an empty array', async (t) => {
-    const result: any[] = []
-    const iteratee = (item: any): void => {
+    const result: unknown[] = []
+    const iteratee = (item: unknown): void => {
       result.push(item)
     }
-    _.each<any, void>([], iteratee)
+    _.each([], iteratee)
     t.deepEqual(result, [])
   })
 
