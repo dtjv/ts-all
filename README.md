@@ -1,16 +1,18 @@
 # ts-toys
 
-Problem sets and solutions in Typescript.
+Programming challenges and solutions in Typescript.
 
 ## Quickstart
 
-`$ yarn install`
+1. clone this repo
+1. `$ cd [repo]`
+1. `$ yarn install`
 
 ## Practice
 
-1. Add a problem set in `src/`
+1. Write your solution to a challenge in `src/`
 1. Test your solution in `test/`
-1. Use the commands below as needed.
+1. Use the [commands](#commands) below as needed.
 
 ## Commands
 
@@ -40,4 +42,4 @@ $ npx tap test/<filename-test.ts>
 
 ## License
 
-The source code is available under the [MIT License](LICENSE).
+[MIT License](LICENSE).

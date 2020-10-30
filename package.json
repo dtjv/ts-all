@@ -1,14 +1,17 @@
 {
   "name": "ts-toys",
   "version": "0.1.0",
-  "description": "Problems sets and solutions in Typescript",
-  "author": "David J. Valles <davidtjvalles@gmail.com>",
+  "description": "Programming challenges and solutions in Typescript",
+  "author": {
+    "name": "David Valles",
+    "email": "davidtjvalles@gmail.com"
+  },
   "license": "MIT",
   "private": true,
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint . --ext .ts",
-    "test": "tap -M coverage-map.js",
+    "test": "tap -M .tap-map.js",
     "coverage": "tap --coverage-report=html"
   },
   "devDependencies": {
