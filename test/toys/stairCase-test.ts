@@ -1,24 +1,23 @@
 import { test } from 'tap'
 import { stairCase } from '../../src/toys/stairCase'
 
-test('stairCase: returns an Array of size N', (t) => {
-  const n = 5
-  const actual = stairCase(n).length
-  const expected = n
-  t.plan(1)
-  t.isEqual(actual, expected)
-})
+test('stairCase', async ({ test }) => {
+  test('result length', async (t) => {
+    const n = 5
+    t.isEqual(stairCase(n).length, n, 'should return an array of size N')
+  })
 
-test('stairCase: returns an N x N array', (t) => {
-  const n = 5
-  const result = stairCase(n).every((row) => row.length === n)
-  t.plan(1)
-  t.true(result)
-})
+  test('result dimensions', async (t) => {
+    const n = 5
+    const result = stairCase(n).every((row) => row.length === n)
+    t.true(result, 'should return an NxN array')
+  })
 
-test('stairCase: returns a L-R ascending stairCase', (t) => {
-  const n = 5
-  const result = stairCase(n).every((row, i) => row.endsWith('#'.repeat(i + 1)))
-  t.plan(1)
-  t.true(result)
+  test('result is a staircase', async (t) => {
+    const n = 5
+    const result = stairCase(n).every((row, i) =>
+      row.endsWith('#'.repeat(i + 1))
+    )
+    t.true(result, 'should return a left-to-right ascending staircase')
+  })
 })

@@ -1,17 +1,17 @@
 import { test } from 'tap'
 import { swapCase } from '../../src/toys/swapCase'
 
-test('swapCase: returns a new string', (t) => {
-  const input = 'hello world'
-  const result = swapCase(input)
-  t.plan(1)
-  t.isNotEqual(input, result)
-})
+test('swapCase', async ({ test }) => {
+  test('result type', async (t) => {
+    const input = 'hello world'
+    const result = swapCase(input)
+    t.isNotEqual(input, result, 'should return a new string')
+  })
 
-test('swapCase: returns a string with letter cases swapped', (t) => {
-  const input = 'HeLLo WoRlD'
-  const actual = swapCase(input)
-  const expected = 'hEllO wOrLd'
-  t.plan(1)
-  t.isEqual(actual, expected)
+  test('result has cases swapped', async (t) => {
+    const input = 'HeLLo WoRlD'
+    const actual = swapCase(input)
+    const expected = 'hEllO wOrLd'
+    t.isEqual(actual, expected, 'should return letter cases swapped string')
+  })
 })

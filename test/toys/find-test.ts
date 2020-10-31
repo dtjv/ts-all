@@ -1,10 +1,13 @@
 import { test } from 'tap'
-import { find, A } from '../../src/toys/find'
+import { find } from '../../src/toys/find'
 
-test('find: returns all occurances of target in an array', (t) => {
-  const data: A = [1, 2, [4, 4, [[4], 5, [2, 3, [4]]]]]
-  const actual = find(data, 4)
-  const expected = [4, 4, 4, 4]
-  t.plan(1)
-  t.deepEquals(actual, expected)
+test('find', async ({ test }) => {
+  test('finds target', async (t) => {
+    const data = [1, 2, [4, 4, [[4], 5, [2, 3, [4]]]]]
+    t.deepEquals(
+      find(data, 4),
+      [4, 4, 4, 4],
+      'should return all occurances of target in array'
+    )
+  })
 })

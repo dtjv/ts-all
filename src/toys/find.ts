@@ -6,10 +6,10 @@
  *
  * f([1, 2, [4, 4, [[4], 5, [2, 3, [4]]]]], 4) => [4, 4, 4, 4]
  */
-export type A = number | number[] | A[]
+type NestedArray = number | number[] | NestedArray[]
 
-export const find = (numbers: A[], target: number): A[] => {
-  let result: A = []
+export const find = (numbers: NestedArray[], target: number): NestedArray[] => {
+  let result: NestedArray = []
 
   for (const value of numbers) {
     if (Array.isArray(value)) {
