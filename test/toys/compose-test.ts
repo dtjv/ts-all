@@ -1,5 +1,5 @@
 import { test } from 'tap'
-import { compose } from '../src/compose'
+import { compose } from '../../src/toys/compose'
 
 test('compose: returns a func', async (t) => {
   const f = (x: unknown) => x

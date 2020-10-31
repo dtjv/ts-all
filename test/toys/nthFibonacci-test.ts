@@ -1,5 +1,5 @@
 import { test } from 'tap'
-import { nthFibR, nthFibI, nthFibDP } from '../src/nthFibonacci'
+import { nthFibR, nthFibI, nthFibDP } from '../../src/toys/nthFibonacci'
 
 test('nthFibI: returns nth term of fibonacci sequence', (t) => {
   const numbers = [0, 1, 2, 3, 4, 5, 6]

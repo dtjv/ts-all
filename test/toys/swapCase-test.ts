@@ -1,5 +1,5 @@
 import { test } from 'tap'
-import { swapCase } from '../src/swapCase'
+import { swapCase } from '../../src/toys/swapCase'
 
 test('swapCase: returns a new string', (t) => {
   const input = 'hello world'

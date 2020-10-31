@@ -1,5 +1,5 @@
 import { test } from 'tap'
-import { setCap } from '../src/setCap'
+import { setCap } from '../../src/toys/setCap'
 
 test('setCap: returns a new string', (t) => {
   const input = 'a Dog walks'

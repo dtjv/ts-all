@@ -1,5 +1,5 @@
 import { test } from 'tap'
-import { pipe } from '../src/pipe'
+import { pipe } from '../../src/toys/pipe'
 
 test('pipe: returns a func', (t) => {
   const f = (x: string) => x

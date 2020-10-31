@@ -1,5 +1,5 @@
 import { test } from 'tap'
-import { factorial } from '../src/factorial'
+import { factorial } from '../../src/toys/factorial'
 
 test('factorial: returns the factorial of N', (t) => {
   const numbers = [0, 1, 2, 3, 4]

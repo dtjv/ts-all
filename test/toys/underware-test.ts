@@ -1,5 +1,5 @@
 import { test } from 'tap'
-import * as _ from '../src/underware'
+import * as _ from '../../src/toys/underware'
 
 test('first', async ({ test }) => {
   test('handles undefined array', async (t) => {

@@ -1,5 +1,5 @@
 import { test } from 'tap'
-import { stairCase } from '../src/stairCase'
+import { stairCase } from '../../src/toys/stairCase'
 
 test('stairCase: returns an Array of size N', (t) => {
   const n = 5
