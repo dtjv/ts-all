@@ -1,8 +1,6 @@
 /**
- * @param  {String}  str1
- * @param  {String}  str2
- * @return {Boolean}      Returns true if a portion of `str1` can be rearranged
- *                        to match `str2`; othwerwise return false.
+ * Given two strings, return true if a portion of the first string can be
+ * rearranged to match the second string; false otherwise.
  */
 export const stringScramble = (str1 = '', str2 = ''): boolean => {
   if (!str1 || !str2) {

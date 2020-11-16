@@ -1,6 +1,6 @@
 /**
- * Given a string, 'str', return a copy of `str` with the first letter of each
- * work capitalized.
+ * Given a string of alpha characters, return a copy with the first letter of
+ * each work capitalized.
  */
 export const setCap = (str: string): string => {
   return str

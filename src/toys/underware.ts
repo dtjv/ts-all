@@ -1,6 +1,6 @@
 /**
- * export the implementations of each function listed:
- * (don't use javascript class' built-in methods)
+ * Export the implementations of each function listed:
+ * (don't use javascript built-in methods)
  *
  *   .first(arr, n)
  *   .last(arr, n)

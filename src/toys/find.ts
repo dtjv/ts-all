@@ -3,8 +3,7 @@
  * 'target', return an array of all occurances of 'target' in 'numbers'.
  *
  * Example:
- *
- * f([1, 2, [4, 4, [[4], 5, [2, 3, [4]]]]], 4) => [4, 4, 4, 4]
+ *   f([1, 2, [4, 4, [[4], 5, [2, 3, [4]]]]], 4) => [4, 4, 4, 4]
  */
 type NestedArray = number | number[] | NestedArray[]
 

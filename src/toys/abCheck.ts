@@ -1,7 +1,6 @@
 /**
- * @param  {string}  str A string of alpha characters.
- * @return {boolean}     Return `true` if characters `a` and `b` in `str` are
- *                       separated by 3 characters; false otherwise.
+ * Given a string of alpha characters, return true if characters 'a' and 'b'
+ * are separated by 3 characters; false otherwise.
  */
 
 export const abCheck = (str: string): boolean => {

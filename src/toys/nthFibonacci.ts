@@ -1,17 +1,14 @@
 /**
- * Export 3 implementations of the same function:
+ * Given a number, return the nth term in the fibonacci sequence.
  *
- * 1. Recursive
- * 2. Iterative
- * 3. Dynamic Programming
+ * Example:
+ *   n    = 0 1 2 3 4 5 6
+ *   x(n) = 0 1 1 2 3 5 8  <-- fibonacci sequence
  *
- * All functions will take a number, 'n' and return the 'nth' term in the
- * fibonacci sequence.
+ *   if n = 6, then the 6th term, x(6) is 8.
  *
- * n    = 0 1 2 3 4 5 6
- * x(n) = 0 1 1 2 3 5 8  <-- fibonacci sequence
- *
- * if n = 6, then the 6th term, x(6) is 8.
+ * Notes:
+ *   - export 3 implementations: recursive, iterative and dynamic programming
  */
 export const nthFibR = (n: number): number => {
   return n === 0 || n === 1 ? n : nthFibR(n - 1) + nthFibR(n - 2)

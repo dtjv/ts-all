@@ -1,5 +1,5 @@
 /**
- * Given a string, `str`, return a copy of `str` with each letter case swapped.
+ * Given a string, return a copy with each letter case swapped.
  */
 export const swapCase = (str: string): string => {
   return str

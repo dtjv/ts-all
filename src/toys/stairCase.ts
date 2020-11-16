@@ -1,12 +1,15 @@
 /**
- * Given a number `n` equal to 5, return an `n` x `n` matrix of the following
- * format:
+ * Given a number, n, return an n x n array of strings with '#' characters that
+ * form a staircase.
  *
- *      #
- *     ##
- *    ###
- *   ####
- *  #####
+ * Example:
+ *   n = 5
+ *
+ *        #
+ *       ##
+ *      ###
+ *     ####
+ *    #####
  */
 export const stairCase = (n: number): string[] => {
   return Array(n)

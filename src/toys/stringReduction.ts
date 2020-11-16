@@ -1,25 +1,15 @@
 /**
- * @param  {String}  str
- * @return {Boolean}     Returns `true` if all chars of `str` are the same;
- *                       `false` otherwise.
- */
-function isReduced(str: string): boolean {
-  return str.split('').every((c, _, a) => c === a[0])
-}
-
-/**
- * Reduce `str` by the following rules:
+ * Given a string composed of 'a', 'b' and/or 'c', return the length of the
+ * shortest reduced string.
  *
- * Only the letters 'a', 'b', and 'c' will be given in `str`. Take two
- * different adjacent characters and replace it with the third.
+ * Reduction Rules:
+ *   Only the letters 'a', 'b', and 'c' will be given in `str`. Take two
+ *   different adjacent characters and replace it with the third.
  *
- * Ex:
- *   `str` = 'bcab', 'bc' reduces to 'a'. Now with 'aab', 'ab' reduces to 'c',
+ * Example
+ *   given 'bcab'. 'bc' reduces to 'a'. Now with 'aab', 'ab' reduces to 'c',
  *   so the final string, 'ac' reduces to 'b'. Return the length of the
  *   shortest reduced string - which is 1.
- *
- * @param  {String} str A string composed of 'a', 'b', and/or 'c'
- * @return {Number}     Returns the length of the shortest reduced string
  */
 interface TheRules {
   [key: string]: string
@@ -52,6 +42,13 @@ export const stringReduction = (str = '') => {
   }
 
   return str.length
+}
+
+/**
+ * Given a string, returns true if all characters are the same; false otherwise.
+ */
+function isReduced(str: string): boolean {
+  return str.split('').every((c, _, a) => c === a[0])
 }
 
 // ----------------------------------------------------------------------------
