@@ -27,7 +27,7 @@ export const stringReduction = (str = '') => {
     }
     const lastChar = s.length % 2 !== 0 ? s[s.length - 1] : ''
     // the while loop guards `s` from ever being null. so `s.match` is
-    // guarenteed to never return null. since i add `!` instead of `|| []` i get
+    // guarenteed to never return null. since i add `!` instead of `|| []`, i
     // get 100% code coverage. (`|| []` is unreachable).
     const groupByTwoChars = s.match(/(\w){2}/g)!
 
