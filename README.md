@@ -1,4 +1,4 @@
-# ts-all
+# ts-practice
 
 Programming challenges and solutions in Typescript.
 
