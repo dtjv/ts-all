@@ -15,7 +15,7 @@ interface TheRules {
   [key: string]: string
 }
 
-export const stringReduction = (str = '') => {
+export const stringReduction = (str = ''): number => {
   function reduceABC(s: string): string {
     const rules: TheRules = {
       ab: 'c',
@@ -27,9 +27,9 @@ export const stringReduction = (str = '') => {
     }
     const lastChar = s.length % 2 !== 0 ? s[s.length - 1] : ''
     // the while loop guards `s` from ever being null. so `s.match` is
-    // guarenteed to never return null. since i add `!` instead of `|| []`, i
+    // guaranteed to never return null. since i add `!` instead of `|| []`, i
     // get 100% code coverage. (`|| []` is unreachable).
-    const groupByTwoChars = s.match(/(\w){2}/g)!
+    const groupByTwoChars = s.match(/(\w){2}/g)! //eslint-disable-line
 
     return groupByTwoChars
       .map((pair: string) => rules[pair])

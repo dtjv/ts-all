@@ -13,7 +13,7 @@ export const commonCharacters = (...args: string[]): string => {
   const [first, rest] = [args[0].replace(/\s/g, ''), args.slice(1)]
   let result = ''
 
-  for (let char of first) {
+  for (const char of first) {
     if (!result.includes(char) && rest.every((s) => s.includes(char))) {
       result = `${result}${char}`
     }

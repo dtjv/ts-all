@@ -4,6 +4,6 @@
  */
 
 export const abCheck = (str: string): boolean => {
-  const re: RegExp = /a.{3}b/g
+  const re = /a.{3}b/g
   return re.test(str)
 }
