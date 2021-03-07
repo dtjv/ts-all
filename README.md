@@ -1,4 +1,4 @@
-# ts-practice
+# ts-toys
 
 Programming challenges and solutions in Typescript.
 
