@@ -1,5 +1,5 @@
 import { test } from 'tap'
-import { xoxo } from '../../src/toys/xoxo'
+import { xoxo } from '../src/xoxo'
 
 test('xoxo', async (t) => {
   t.true(xoxo(), 'should return true when no string passed')

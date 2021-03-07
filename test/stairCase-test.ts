@@ -1,5 +1,5 @@
 import { test } from 'tap'
-import { stairCase } from '../../src/toys/stairCase'
+import { stairCase } from '../src/stairCase'
 
 test('stairCase', async ({ test }) => {
   test('result length', async (t) => {

@@ -1,5 +1,5 @@
 /**
- * Given a number, n, return an n x n array of strings with '#' characters that
+ * Given a number, n, returns an n x n array of strings with '#' characters that
  * form a staircase.
  *
  * Example:
@@ -11,6 +11,7 @@
  *     ####
  *    #####
  */
+
 export const stairCase = (n: number): string[] => {
   return Array(n)
     .fill('')

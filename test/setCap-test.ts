@@ -1,5 +1,5 @@
 import { test } from 'tap'
-import { setCap } from '../../src/toys/setCap'
+import { setCap } from '../src/setCap'
 
 test('setCap', async ({ test }) => {
   test('result type', async (t) => {

@@ -5,6 +5,7 @@
  * Example:
  *   f([1, 2, [4, 4, [[4], 5, [2, 3, [4]]]]], 4) => [4, 4, 4, 4]
  */
+
 type NestedArray = number | number[] | NestedArray[]
 
 export const find = (numbers: NestedArray[], target: number): NestedArray[] => {

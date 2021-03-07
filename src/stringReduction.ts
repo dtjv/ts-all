@@ -11,6 +11,7 @@
  *   so the final string, 'ac' reduces to 'b'. Return the length of the
  *   shortest reduced string - which is 1.
  */
+
 interface TheRules {
   [key: string]: string
 }

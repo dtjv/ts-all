@@ -1,8 +1,10 @@
 /**
  * Given a positive number, n, return n! Throws RangeError on negative input.
  *
- * n! = n * (n-1)!
+ * The factorial formula is:
+ *   n! = n * (n-1)!
  */
+
 function factorial(n: number): number {
   if (n < 0) {
     throw new RangeError('factorial: expected a positive number')

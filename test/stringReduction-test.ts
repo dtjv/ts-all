@@ -1,5 +1,5 @@
 import { test } from 'tap'
-import { stringReduction } from '../../src/toys/stringReduction'
+import { stringReduction } from '../src/stringReduction'
 
 test('stringReduction', async (t) => {
   t.equal(stringReduction(), 0, 'should return 0 given no string')

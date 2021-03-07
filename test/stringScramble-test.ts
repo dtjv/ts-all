@@ -1,5 +1,5 @@
 import { test } from 'tap'
-import { stringScramble } from '../../src/toys/stringScramble'
+import { stringScramble } from '../src/stringScramble'
 
 test('stringScramble', async (t) => {
   t.false(stringScramble(), 'should be false for no params')

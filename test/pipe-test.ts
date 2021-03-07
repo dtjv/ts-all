@@ -1,5 +1,5 @@
 import { test } from 'tap'
-import { pipe } from '../../src/toys/pipe'
+import { pipe } from '../src/pipe'
 
 test('pipe', async ({ test }) => {
   test('pipe returns a function', async (t) => {
@@ -26,7 +26,6 @@ test('pipe', async ({ test }) => {
     const f2 = (p: { age: number; name: string }) =>
       `${p.name} is ${p.age} yrs old`
     const f = pipe(f1, f2)
-
     t.isEqual(
       f(5, 'joe'),
       'joe is 5 yrs old',

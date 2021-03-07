@@ -1,6 +1,7 @@
 /**
- * Given a string, return a copy with each letter case swapped.
+ * Given a string of characters, return a copy with each letter case swapped.
  */
+
 export const swapCase = (str: string): string => {
   return str
     .split('')

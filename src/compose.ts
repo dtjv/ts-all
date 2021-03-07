@@ -1,9 +1,8 @@
 /**
- * Implement the function `compose`.
- *
- * `compose` should return a function that is the composition of a list of
- * functions of any length. `compose` moves thru arguments from right to left.
- * Each function is called on the return value of the function that follows.
+ * The compose function should return a function that is the composition of a
+ * list of functions of any length. Compose moves thru arguments from right to
+ * left. Each function is called on the return value of the function that
+ * follows.
  *
  * Example:
  *   const sayHi = name => `hi: ${name}`;

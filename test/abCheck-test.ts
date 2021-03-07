@@ -1,5 +1,5 @@
 import { test } from 'tap'
-import { abCheck } from '../../src/toys/abCheck'
+import { abCheck } from '../src/abCheck'
 
 test('abCheck', async (t) => {
   t.false(abCheck(''), 'return false when empty string given')

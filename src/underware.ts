@@ -1,30 +1,7 @@
 /**
- * Export the implementations of each function listed:
- * (don't use javascript built-in methods)
- *
- *   .first(arr, n)
- *   .last(arr, n)
- *   .each(arr, iteratee)
- *   .indexOf(arr, target)
- *   .filter(arr, test)
- *   .reject(arr, test)
- *   .uniqify(arr)
- *   .map(arr, iteratee)
- *   .pluck(arr, key)
- *   .reduce(arr, iteratee, accumulator)
- *   .contains(arr, target)
- *   .every(arr, iteratee)
- *   .some(arr, iteratee)
- *   .extends(obj, ...args)
- *   .defaults(obj, ...args)
- *   .once(func)
- *   .memoize(func)
- *   .delay(func, wait, ...args)
- *   .flatten(nestedArray)
- *   .intersection(...args)
- *   .difference(arr, ...args)
- *   .zip(...args)
+ * Implementation a few underscore functions. No JavaScript built-in methods.
  */
+
 interface Iteratee<T, R> {
   (value: T, index: number, arr: T[]): R
 }
@@ -48,11 +25,13 @@ interface ReduceCallback<T, R> {
 type NestedArray<T> = T | T[] | NestedArray<T>[]
 
 /*
- * returns the first element of an array.
- * passing in `takeCount` where:
- *   0 < takeCountn < array.length, returns first `takeCount` elements of array
- *   takeCount <= 0, returns an empty array
- *   takeCount > array.length, returns all elements of array
+ * Returns the first element of an array.
+ *
+ * 'takeCount' parameter:
+ *   - if 0 < takeCountn < array.length, returns first `takeCount` elements of
+ *     array
+ *   - if takeCount <= 0, returns an empty array
+ *   - if takeCount > array.length, returns all elements of array
  */
 export const first = <T>(arr: T[] = [], takeCount?: number): T | T[] => {
   if (takeCount === undefined) return arr[0]
@@ -68,11 +47,13 @@ export const first = <T>(arr: T[] = [], takeCount?: number): T | T[] => {
 }
 
 /*
- * returns the last element of an array.
- * passing in `takeCount` where:
- *   0 < takeCount < array.length, returns last `takeCount` elements of array
- *   takeCount <= 0, returns an empty array
- *   takeCount > array.length, returns all elements of array
+ * Returns the last element of an array.
+ *
+ * 'takeCount' parameter:
+ *   - if 0 < takeCountn < array.length, returns last `takeCount` elements of
+ *     array
+ *   - if takeCount <= 0, returns an empty array
+ *   - if takeCount > array.length, returns all elements of array
  */
 export const last = <T>(arr: T[] = [], takeCount?: number): T | T[] => {
   if (takeCount === undefined) return arr[arr.length - 1]

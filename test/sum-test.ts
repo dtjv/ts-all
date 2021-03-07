@@ -1,5 +1,5 @@
 import { test } from 'tap'
-import { sum } from '../../src/toys/sum'
+import { sum } from '../src/sum'
 
 test('sum', async (t) => {
   t.equals(sum(0), 1, 'should return 1 for n < 1')

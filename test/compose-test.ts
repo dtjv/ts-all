@@ -1,5 +1,5 @@
 import { test } from 'tap'
-import { compose } from '../../src/toys/compose'
+import { compose } from '../src/compose'
 
 test('compose', async ({ test }) => {
   test('compose returns a function', async (t) => {

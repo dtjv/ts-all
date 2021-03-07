@@ -1,5 +1,5 @@
 import { test } from 'tap'
-import { swapCase } from '../../src/toys/swapCase'
+import { swapCase } from '../src/swapCase'
 
 test('swapCase', async ({ test }) => {
   test('result type', async (t) => {

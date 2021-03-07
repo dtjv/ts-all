@@ -1,5 +1,5 @@
 import { test } from 'tap'
-import { commonCharacters } from '../../src/toys/commonCharacters'
+import { commonCharacters } from '../src/commonCharacters'
 
 test('commonCharacters', async (t) => {
   t.equal(commonCharacters(), '', 'return empty string when no args given')

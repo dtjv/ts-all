@@ -1,12 +1,13 @@
 /**
- *  Given an arbitrary number of strings, return a string containing the set of
- *  unique characters found in each string (no duplication), in the order that
- *  they appeared in the first string argument. (skip spaces and characters
- *  previously encountered).
+ * Given an arbitrary number of strings, return a string containing the set of
+ * unique characters found in each string (no duplication), in the order that
+ * they appeared in the first string argument. (skip spaces and characters
+ * previously encountered).
  *
  * Example:
- *    console.log(commonCharacters('acex ivou', 'aegihobu')) // prints 'aeiou'
+ *   console.log(commonCharacters('acex ivou', 'aegihobu')) // prints 'aeiou'
  */
+
 export const commonCharacters = (...args: string[]): string => {
   if (!args.length) return ''
 

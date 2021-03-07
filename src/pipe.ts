@@ -1,9 +1,8 @@
 /**
- * Implement the function `pipe`:
- *
- * `pipe` composes a series of functions and returns the resulting function.
- * Each function is called on the return value of the preceding function. You
- * can view pipe as moving left to right through its arguments.
+ * The pipe function composes a series of functions into one and returns the
+ * resulting function. Each function is called on the return value of the
+ * preceding function. You can view pipe as moving left to right through its
+ * arguments.
  *
  * Example:
  *  const add2 = number => number + 2;

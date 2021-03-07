@@ -2,6 +2,7 @@
  * Given two strings, return true if a portion of the first string can be
  * rearranged to match the second string; false otherwise.
  */
+
 export const stringScramble = (str1 = '', str2 = ''): boolean => {
   if (!str1 || !str2) {
     return false
