@@ -7,14 +7,14 @@ function isOdd(x: number): boolean {
   return x % 2 !== 0
 }
 
-export const dashInsert = (str: string = ''): string => {
+export const dashInsert = (str = ''): string => {
   let result = ''
   let i = 0
   let j = 1
 
   while (j < str.length) {
-    let a = parseInt(str[i++])
-    let b = parseInt(str[j++])
+    const a = parseInt(str[i++])
+    const b = parseInt(str[j++])
 
     result += `${a}`
 
