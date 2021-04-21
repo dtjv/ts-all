@@ -11,24 +11,22 @@
 
 export function addPersistence(n: number): number {
   let count = 0
-  let num = n
-  let nums: string
+  let nums = n.toString()
 
-  while (true) {
-    nums = num.toString()
-
-    if (nums.length === 1) {
-      return count
-    }
-
-    num = nums.split('').reduce((a, c) => a + parseInt(c), 0)
+  while (nums.length > 1) {
+    nums = nums
+      .split('')
+      .reduce((a, c) => a + parseInt(c), 0)
+      .toString()
     count += 1
   }
+
+  return count
 }
 
 export function addPersistenceR(n: number): number {
-  let count = 1
-  let digits = n.toString()
+  const count = 1
+  const digits = n.toString()
 
   if (digits.length === 1) {
     return 0
