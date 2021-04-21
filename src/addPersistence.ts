@@ -25,3 +25,17 @@ export function addPersistence(n: number): number {
     count += 1
   }
 }
+
+export function addPersistenceR(n: number): number {
+  let count = 1
+  let digits = n.toString()
+
+  if (digits.length === 1) {
+    return 0
+  }
+
+  return (
+    count +
+    addPersistenceR(digits.split('').reduce((a, c) => a + parseInt(c), 0))
+  )
+}
