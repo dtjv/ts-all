@@ -16,7 +16,7 @@ export function balancedBrackets(input: string): boolean {
     if (BRACKETS.has(char)) {
       stack.push(char)
     } else {
-      const openBracket = stack.pop()!
+      const openBracket = stack.pop() as string
       if (BRACKETS.get(openBracket) !== char) {
         return false
       }
