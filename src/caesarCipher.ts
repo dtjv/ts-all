@@ -22,7 +22,7 @@ export function caesarCipher(input = '', count = 0): string {
   return input
     .split('')
     .map((char) => {
-      let charCode = char.charCodeAt(0)
+      const charCode = char.charCodeAt(0)
 
       if (LOWERCASE.test(char)) {
         return String.fromCharCode(getNewCharCode(charCode + count, 97, 122))
