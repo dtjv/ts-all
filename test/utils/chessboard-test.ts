@@ -1,16 +1,5 @@
 import { test } from 'tap'
-import { ChessBoard, Cell, Board } from '../../src/utils/chessboard'
-
-/*
-function setup() {
-  const board = [
-    [1, 0, 0, 0],
-    [0, 1, 0, 0],
-    [0, 0, 1, 0],
-    [0, 0, 0, 1],
-  ]
-}
-*/
+import { ChessBoard, Board } from '../../src/utils/chessboard'
 
 test('ChessBoard', async ({ test }) => {
   test('constructor w/o parameter', async (t) => {
@@ -34,8 +23,8 @@ test('ChessBoard', async ({ test }) => {
     )
   })
 
-  test('init', async (t) => {
-    t.test('initilaize w/ input data', async (t) => {
+  test('init', async ({ test }) => {
+    test('initilaize w/ input data', async (t) => {
       const chessboard = new ChessBoard()
       const inputboard: Board = [
         [1, 0, 0, 0],
@@ -59,7 +48,7 @@ test('ChessBoard', async ({ test }) => {
       )
     })
 
-    t.test('initilaize w/o data', async (t) => {
+    test('initilaize w/o data', async (t) => {
       const chessboard = new ChessBoard()
 
       t.throws(
@@ -68,7 +57,7 @@ test('ChessBoard', async ({ test }) => {
       )
     })
 
-    t.test('initilaize w/ bad data', async (t) => {
+    test('initilaize w/ bad data', async (t) => {
       const chessboard = new ChessBoard()
       const inputboard: Board = [
         [1, 0, 0, 0],
@@ -82,11 +71,11 @@ test('ChessBoard', async ({ test }) => {
     })
   })
 
-  test('setCell', async (t) => {
-    t.test('should set a cell', async (t) => {
+  test('setCell', async ({ test }) => {
+    test('should set a cell', async (t) => {
       const chessboard = new ChessBoard(4)
 
-      chessboard.setCell(0, 0, Cell.PIECE)
+      chessboard.toggleCell(0, 0)
 
       t.deepEqual(
         chessboard.board,
@@ -100,18 +89,18 @@ test('ChessBoard', async ({ test }) => {
       )
     })
 
-    t.test('should fail on bad input', async (t) => {
+    test('should fail on bad input', async (t) => {
       const chessboard = new ChessBoard(4)
 
       t.throws(
-        () => chessboard.setCell(4, 4, Cell.PIECE),
+        () => chessboard.toggleCell(4, 4),
         'should throw when row and column are out of range'
       )
     })
   })
 
-  test('isCellValidForRook', async (t) => {
-    t.test('should pass checks', async (t) => {
+  test('isCellValidForRook', async ({ test }) => {
+    test('should pass checks', async (t) => {
       const chessboard = new ChessBoard()
 
       chessboard.init([
@@ -121,10 +110,10 @@ test('ChessBoard', async ({ test }) => {
         [0, 0, 0, 1],
       ])
 
-      t.true(chessboard.isCellValidForRook(1, 1))
+      t.true(chessboard.isValidRookPlacement(1, 1))
     })
 
-    t.test('should not pass checks', async (t) => {
+    test('should not pass checks', async (t) => {
       const chessboard = new ChessBoard()
 
       chessboard.init([
@@ -134,14 +123,14 @@ test('ChessBoard', async ({ test }) => {
         [0, 0, 0, 1],
       ])
 
-      t.false(chessboard.isCellValidForRook(1, 3))
+      t.false(chessboard.isValidRookPlacement(1, 3))
     })
 
-    t.test('should fail on bad input', async (t) => {
+    test('should fail on bad input', async (t) => {
       const chessboard = new ChessBoard(4)
 
       t.throws(
-        () => chessboard.isCellValidForRook(4, 4),
+        () => chessboard.isValidRookPlacement(4, 4),
         'should throw when row and column are out of range'
       )
     })

@@ -28,27 +28,28 @@ export class ChessBoard {
 
   public init(board: Board = []): void {
     if (board.length !== board[0]?.length) {
-      throw new Error('Input row and column count must match.')
+      throw new Error('Input board must be NxN')
     }
 
     this._board = board.slice().map((col) => col.slice())
   }
 
-  public setCell(row: number, col: number, value: Cell): void {
-    if (!this.isCellValid(row, col)) {
-      throw new RangeError(`Invalid cell: (${row},${col})`)
+  public toggleCell(row: number, col: number): void {
+    if (!this.isCellInBounds(row, col)) {
+      throw new RangeError(`Out of bounds cell: (${row},${col})`)
     }
-    this._board[row][col] = value
+    this._board[row][col] =
+      this._board[row][col] === Cell.EMPTY ? Cell.PIECE : Cell.EMPTY
   }
 
-  public isCellValidForRook(row: number, col: number): boolean {
-    if (!this.isCellValid(row, col)) {
-      throw new RangeError(`Invalid cell: (${row},${col})`)
+  public isValidRookPlacement(row: number, col: number): boolean {
+    if (!this.isCellInBounds(row, col)) {
+      throw new RangeError(`Out of bounds cell: (${row},${col})`)
     }
     return this.isRowEmpty(row) && this.isColEmpty(col)
   }
 
-  private isCellValid(row: number, col: number): boolean {
+  private isCellInBounds(row: number, col: number): boolean {
     return this.isRowInBounds(row) && this.isColInBounds(col)
   }
 
